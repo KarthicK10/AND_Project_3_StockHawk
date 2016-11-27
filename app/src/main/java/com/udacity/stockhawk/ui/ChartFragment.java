@@ -40,6 +40,8 @@ public class ChartFragment extends Fragment implements LoaderManager.LoaderCallb
     };
     public static final int COL_HISTORY = 0;
     private LineChart lineChart;
+    private String chartValues;
+    private static final String CHART_VALUES_KEY = "CHART_VALUES_KEY";
     /**
      * Called to have the fragment instantiate its user interface view.
      * This is optional, and non-graphical fragments can return null (which
@@ -67,7 +69,9 @@ public class ChartFragment extends Fragment implements LoaderManager.LoaderCallb
         }
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
         lineChart = (LineChart) rootView.findViewById(R.id.chart);
-
+        if(savedInstanceState != null){
+            loadChart(savedInstanceState.getString(CHART_VALUES_KEY));
+        }
         return rootView;
     }
 
@@ -88,6 +92,32 @@ public class ChartFragment extends Fragment implements LoaderManager.LoaderCallb
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         getLoaderManager().initLoader(CHART_LOADER, null, this);
         super.onActivityCreated(savedInstanceState);
+    }
+
+    /**
+     * Called to ask the fragment to save its current dynamic state, so it
+     * can later be reconstructed in a new instance of its process is
+     * restarted.  If a new instance of the fragment later needs to be
+     * created, the data you place in the Bundle here will be available
+     * in the Bundle given to {@link #onCreate(Bundle)},
+     * {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}, and
+     * {@link #onActivityCreated(Bundle)}.
+     * <p>
+     * <p>This corresponds to {@link DetailActivity#onSaveInstanceState(Bundle)
+     * Activity.onSaveInstanceState(Bundle)} and most of the discussion there
+     * applies here as well.  Note however: <em>this method may be called
+     * at any time before {@link #onDestroy()}</em>.  There are many situations
+     * where a fragment may be mostly torn down (such as when placed on the
+     * back stack with no UI showing), but its state will not be saved until
+     * its owning activity actually needs to save its state.
+     *
+     * @param outState Bundle in which to place your saved state.
+     */
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        Timber.i("onSaveInstanceState");
+        super.onSaveInstanceState(outState);
+        outState.putString(CHART_VALUES_KEY, chartValues);
     }
 
     /**
@@ -156,24 +186,9 @@ public class ChartFragment extends Fragment implements LoaderManager.LoaderCallb
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if(data != null && data.moveToNext()){
-            String values = data.getString(COL_HISTORY);
-            Timber.d(Contract.Quote.COLUMN_HISTORY+": %s", values);
-            String chartEntries[] = values.split("\\r?\\n");
-            ArrayList<Entry> entries = new ArrayList<>();
-            ArrayList<String> labels = new ArrayList<>();
-            for (int i=chartEntries.length-1; i>=0; i--) {
-                String chartEntry = chartEntries[i];
-                String timeMilliSecondsStr = chartEntry.split(",")[0];
-                long timeInMilliSeconds = Long.parseLong(timeMilliSecondsStr);
-                String time = Utility.getFormattedMonthDay(getActivity(), timeInMilliSeconds);
-                String value = chartEntry.split(",")[1];
-                entries.add(new Entry( Float.parseFloat(value), chartEntries.length-i) );
-                labels.add(time);
-            }
-            LineDataSet dataSet = new LineDataSet(entries, getString(R.string.chartYAxis));
-            LineData lineData = new LineData(labels, dataSet);
-            lineChart.setData(lineData);
-            lineChart.setDescription(getString(R.string.chartDescription));
+            chartValues = data.getString(COL_HISTORY);
+            Timber.d(Contract.Quote.COLUMN_HISTORY+": %s", chartValues);
+            loadChart(chartValues);
         }
     }
 
@@ -187,5 +202,24 @@ public class ChartFragment extends Fragment implements LoaderManager.LoaderCallb
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
+    }
+
+    private void loadChart(String values){
+        String chartEntries[] = values.split("\\r?\\n");
+        ArrayList<Entry> entries = new ArrayList<>();
+        ArrayList<String> labels = new ArrayList<>();
+        for (int i=chartEntries.length-1; i>=0; i--) {
+            String chartEntry = chartEntries[i];
+            String timeMilliSecondsStr = chartEntry.split(",")[0];
+            long timeInMilliSeconds = Long.parseLong(timeMilliSecondsStr);
+            String time = Utility.getFormattedMonthDay(getActivity(), timeInMilliSeconds);
+            String value = chartEntry.split(",")[1];
+            entries.add(new Entry( Float.parseFloat(value), chartEntries.length-i) );
+            labels.add(time);
+        }
+        LineDataSet dataSet = new LineDataSet(entries, getString(R.string.chartYAxis));
+        LineData lineData = new LineData(labels, dataSet);
+        lineChart.setData(lineData);
+        lineChart.setDescription(getString(R.string.chartDescription));
     }
 }

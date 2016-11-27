@@ -221,5 +221,6 @@ public class ChartFragment extends Fragment implements LoaderManager.LoaderCallb
         LineData lineData = new LineData(labels, dataSet);
         lineChart.setData(lineData);
         lineChart.setDescription(getString(R.string.chartDescription));
+        lineChart.setDescriptionTextSize(50f);
     }
 }

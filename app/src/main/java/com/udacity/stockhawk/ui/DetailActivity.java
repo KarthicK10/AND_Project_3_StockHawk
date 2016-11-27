@@ -22,7 +22,10 @@ public class DetailActivity extends AppCompatActivity{
         if(savedInstanceState == null){
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
-            DetailFragment detailFragment = new DetailFragment();
+            Bundle arguments = new Bundle();
+            arguments.putParcelable(ChartFragment.STOCK_URI, getIntent().getData());
+            ChartFragment detailFragment = new ChartFragment();
+            detailFragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.chartContainer, detailFragment)
                     .commit();

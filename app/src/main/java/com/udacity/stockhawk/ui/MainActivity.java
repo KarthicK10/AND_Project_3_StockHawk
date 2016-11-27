@@ -83,8 +83,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 getContentResolver().delete(Contract.Quote.makeUriForStock(symbol), null, null);
             }
         }).attachToRecyclerView(recyclerView);
-
-
     }
 
     private boolean networkUp() {

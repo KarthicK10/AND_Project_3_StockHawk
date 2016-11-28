@@ -14,7 +14,7 @@ import com.udacity.stockhawk.ui.MainActivity;
  * Created by KarthicK on 11/27/2016.
  */
 
-public class DetailWidgerProvider extends AppWidgetProvider {
+public class DetailWidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // Perform this loop procedure for each App Widget that belongs to this provider

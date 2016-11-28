@@ -39,5 +39,6 @@
 
     <string name="chartYAxis" translatable="true">Stock Values</string>
     <string name="chartDescription" translatable="true">Stock Values Over Time</string>
+    <string name="title_widget_detail" translatable="true">Stock Hawk Details</string>
 
 </resources>

@@ -86,18 +86,21 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService{
                 views.setTextViewText(R.id.widget_price, dollarFormat.format(data.getFloat(Contract.Quote.POSITION_PRICE)));
                 float rawAbsoluteChange = data.getFloat(Contract.Quote.POSITION_ABSOLUTE_CHANGE);
                 float percentageChange = data.getFloat(Contract.Quote.POSITION_PERCENTAGE_CHANGE);
-                if (rawAbsoluteChange > 0) {
-                    views.setInt(R.id.widget_change, "setBackgroundResource", R.drawable.percent_change_pill_green);
-                } else {
-                    views.setInt(R.id.widget_change, "setBackgroundResource", R.drawable.percent_change_pill_red);
-                }
+
                 String change = dollarFormatWithPlus.format(rawAbsoluteChange);
                 String percentage = percentageFormat.format(percentageChange / 100);
+
                 if (PrefUtils.getDisplayMode(getApplicationContext())
                         .equals(getApplicationContext().getString(R.string.pref_display_mode_absolute_key))) {
                     views.setTextViewText(R.id.widget_change, change);
                 } else {
                     views.setTextViewText(R.id.widget_change, percentage);
+                }
+
+                if (rawAbsoluteChange > 0) {
+                    views.setInt(R.id.widget_change, "setBackgroundResource", R.drawable.percent_change_pill_green);
+                } else {
+                    views.setInt(R.id.widget_change, "setBackgroundResource", R.drawable.percent_change_pill_red);
                 }
 
                 final Intent fillInIntent = new Intent();

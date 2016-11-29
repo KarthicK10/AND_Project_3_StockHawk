@@ -41,4 +41,8 @@
     <string name="chartDescription" translatable="true">Stock Values Over Time</string>
     <string name="title_widget_detail" translatable="true">Stock Hawk Details</string>
 
+    <!-- Content Description -->
+    <string name="add_stock_button_desc" translatable="true">Adding stock</string>
+    <string name="stock_increase_desc" translatable="true">Up by</string>
+    <string name="stock_decrease_desc" translatable="true">Down by</string>
 </resources>

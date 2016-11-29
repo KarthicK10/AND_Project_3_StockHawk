@@ -70,7 +70,8 @@ public class ChartFragment extends Fragment implements LoaderManager.LoaderCallb
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
         lineChart = (LineChart) rootView.findViewById(R.id.chart);
         if(savedInstanceState != null){
-            loadChart(savedInstanceState.getString(CHART_VALUES_KEY));
+            chartValues = savedInstanceState.getString(CHART_VALUES_KEY);
+            loadChart(chartValues);
         }
         return rootView;
     }
@@ -119,6 +120,7 @@ public class ChartFragment extends Fragment implements LoaderManager.LoaderCallb
         super.onSaveInstanceState(outState);
         outState.putString(CHART_VALUES_KEY, chartValues);
     }
+
 
     /**
      * Instantiate and return a new Loader for the given ID.

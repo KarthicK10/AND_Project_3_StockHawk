@@ -1,34 +1,34 @@
 <resources>
-    <string name="app_name">Stock Hawk</string>
+    <string name="app_name" translatable="false">Stock Hawk</string>
     <string name="detail_label" translatable="true">Graph Over Time</string>
 
     <string name="pref_stocks_initialized_key" translatable="false">initialized</string>
 
-    <string name="pref_stocks_key">stocks</string>
+    <string name="pref_stocks_key" translatable="false">stocks</string>
 
-    <string name="chart_no_data">No data</string>
-
-
-    <string name="pref_display_mode_title">Display Mode</string>
-    <string name="pref_display_mode_key">displayMode</string>
-    <string name="pref_display_mode_default">@string/pref_display_mode_percentage_key</string>
-
-    <string name="pref_display_mode_absolute_key">absolute</string>
-    <string name="pref_display_mode_percentage_key">percentage</string>
-
-    <string name="default_stocks_yahoo">YHOO</string>
-    <string name="default_stocks_apple">AAPL</string>
-    <string name="default_stocks_microsoft">MSFT</string>
-    <string name="default_stocks_facebook">FB</string>
+    <string name="chart_no_data" translatable="false">No data</string>
 
 
-    <string name="action_change_units">@string/pref_display_mode_key</string>
+    <string name="pref_display_mode_title" translatable="false">Display Mode</string>
+    <string name="pref_display_mode_key" translatable="false">displayMode</string>
+    <string name="pref_display_mode_default" translatable="false">@string/pref_display_mode_percentage_key</string>
+
+    <string name="pref_display_mode_absolute_key" translatable="false">absolute</string>
+    <string name="pref_display_mode_percentage_key" translatable="false">percentage</string>
+
+    <string name="default_stocks_yahoo" translatable="false">YHOO</string>
+    <string name="default_stocks_apple" translatable="false">AAPL</string>
+    <string name="default_stocks_microsoft" translatable="false">MSFT</string>
+    <string name="default_stocks_facebook" translatable="false">FB</string>
 
 
-    <string name="dialog_title">Add Stock</string>
-    <string name="dialog_hint">Symbol (e.g. GOOG)</string>
-    <string name="dialog_cancel">Cancel</string>
-    <string name="dialog_add">Add</string>
+    <string name="action_change_units" translatable="false">@string/pref_display_mode_key</string>
+
+
+    <string name="dialog_title" translatable="true">Add Stock</string>
+    <string name="dialog_hint" translatable="false">Symbol (e.g. GOOG)</string>
+    <string name="dialog_cancel" translatable="true">Cancel</string>
+    <string name="dialog_add" translatable="true">Add</string>
 
     <string name="error_stock_not_found" translatable="true">Symbol %s is invalid!</string>
     <string name="error_no_network" translatable="true">No network connectivity! Will load stock cursor when the network is available.</string>
